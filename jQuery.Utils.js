@@ -665,12 +665,34 @@
             }
 
             this.each(function (idx) {
+                var el = $(this),
+                    pos = el.css('position'),
+                    disp = el.css('display'),
+                    vis = el.css('visibility'),
+                    uncomputed = !el.is(':visible');
+
                 if (typeof max != 'undefined' && idx > max && max != -1 && max != null) {
                     return false;
                 }
 
+                if (uncomputed) {
+                    el.css({
+                        position: 'absolute',
+                        display: 'block',
+                        visibility: 'hidden'
+                    });
+                }
+
                 height +=
-                    $(this)[outer ? 'outerHeight' : 'height']();
+                    el[outer ? 'outerHeight' : 'height']();
+
+                if (uncomputed) {
+                    el.css({
+                        position: pos,
+                        display: disp,
+                        visibility: vis
+                    });
+                }
             });
 
             return height == 0 ? null : height;
