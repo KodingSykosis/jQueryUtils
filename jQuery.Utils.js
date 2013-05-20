@@ -340,6 +340,7 @@
             return point.x >= box.left && point.x <= box.right &&
                 point.y >= box.top && point.y <= box.bottom;
         },
+		
         button: function (text, color, icon) {
             var innerDivider, innerIcon, innerIconWrap;
             var innerContent = $('<p>').html(text);
